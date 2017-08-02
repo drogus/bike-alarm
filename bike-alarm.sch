@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
+<grid distance="0.05" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="no" active="no"/>
 <layer number="16" name="Bottom" color="1" fill="1" visible="no" active="no"/>
@@ -76,6 +76,8 @@
 <layer number="111" name="LPC17xx" color="7" fill="1" visible="no" active="yes"/>
 <layer number="112" name="tSilk" color="7" fill="1" visible="no" active="yes"/>
 <layer number="113" name="ReferenceLS" color="7" fill="1" visible="no" active="no"/>
+<layer number="114" name="Badge_Outline" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="115" name="ReferenceISLANDS" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="116" name="Patch_BOT" color="9" fill="4" visible="no" active="yes"/>
 <layer number="118" name="Rect_Pads" color="7" fill="1" visible="no" active="no"/>
 <layer number="121" name="_tsilk" color="7" fill="1" visible="no" active="yes"/>
@@ -3729,6 +3731,21 @@ Source: coiltronics_dr_series.pdf</description>
 <rectangle x1="1.7215" y1="-2.559" x2="2.8215" y2="-1.984" layer="21" rot="R225"/>
 <rectangle x1="1.7215" y1="1.984" x2="2.8215" y2="2.559" layer="21" rot="R315"/>
 </package>
+<package name="SOT23-3">
+<wire x1="1.4224" y1="0.6604" x2="1.4224" y2="-0.6604" width="0.1524" layer="51"/>
+<wire x1="1.4224" y1="-0.6604" x2="-1.4224" y2="-0.6604" width="0.1524" layer="51"/>
+<wire x1="-1.4224" y1="-0.6604" x2="-1.4224" y2="0.6604" width="0.1524" layer="51"/>
+<wire x1="-1.4224" y1="0.6604" x2="1.4224" y2="0.6604" width="0.1524" layer="51"/>
+<wire x1="-0.8" y1="0.7" x2="-1.4" y2="0.7" width="0.2032" layer="21"/>
+<wire x1="-1.4" y1="0.7" x2="-1.4" y2="-0.1" width="0.2032" layer="21"/>
+<wire x1="0.8" y1="0.7" x2="1.4" y2="0.7" width="0.2032" layer="21"/>
+<wire x1="1.4" y1="0.7" x2="1.4" y2="-0.1" width="0.2032" layer="21"/>
+<smd name="3" x="0" y="1.1" dx="0.8" dy="0.9" layer="1"/>
+<smd name="2" x="0.95" y="-1" dx="0.8" dy="0.9" layer="1"/>
+<smd name="1" x="-0.95" y="-1" dx="0.8" dy="0.9" layer="1"/>
+<text x="-0.8255" y="1.778" size="0.4064" layer="25">&gt;NAME</text>
+<text x="-1.016" y="-0.1905" size="0.4064" layer="27">&gt;VALUE</text>
+</package>
 </packages>
 <symbols>
 <symbol name="VBUS">
@@ -3784,6 +3801,21 @@ Diode with low voltage drop</description>
 <rectangle x1="-3.81" y1="-0.889" x2="3.81" y2="0.889" layer="94"/>
 <pin name="2" x="7.62" y="0" visible="pad" length="middle" direction="pas" swaplevel="1" rot="R180"/>
 <pin name="1" x="-7.62" y="0" visible="pad" length="middle" direction="pas" swaplevel="1"/>
+</symbol>
+<symbol name="MCP1700">
+<wire x1="7.62" y1="7.62" x2="7.62" y2="-5.08" width="0.254" layer="94"/>
+<wire x1="7.62" y1="-5.08" x2="-7.62" y2="-5.08" width="0.254" layer="94"/>
+<wire x1="-7.62" y1="-5.08" x2="-7.62" y2="7.62" width="0.254" layer="94"/>
+<pin name="VIN" x="-10.16" y="5.08" length="short"/>
+<pin name="VOUT" x="10.16" y="5.08" length="short" rot="R180"/>
+<pin name="GND" x="0" y="-7.62" length="short" rot="R90"/>
+<wire x1="-7.62" y1="7.62" x2="7.62" y2="7.62" width="0.254" layer="94"/>
+<text x="-3.81" y="8.128" size="1.27" layer="96">&gt;VALUE</text>
+</symbol>
+<symbol name="3V">
+<pin name="3V" x="0" y="0" visible="pin" length="short" direction="sup" rot="R90"/>
+<wire x1="-1.016" y1="1.524" x2="0" y2="2.54" width="0.254" layer="94"/>
+<wire x1="0" y1="2.54" x2="1.016" y2="1.524" width="0.254" layer="94"/>
 </symbol>
 </symbols>
 <devicesets>
@@ -3861,6 +3893,35 @@ Source: coiltronics_dr_series.pdf</description>
 <connect gate="G$1" pin="1" pad="1"/>
 <connect gate="G$1" pin="2" pad="2"/>
 </connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="MCP1700">
+<gates>
+<gate name="A" symbol="MCP1700" x="0" y="-2.54"/>
+</gates>
+<devices>
+<device name="" package="SOT23-3">
+<connects>
+<connect gate="A" pin="GND" pad="1"/>
+<connect gate="A" pin="VIN" pad="3"/>
+<connect gate="A" pin="VOUT" pad="2"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="3V">
+<gates>
+<gate name="3V" symbol="3V" x="0" y="0"/>
+</gates>
+<devices>
+<device name="">
 <technologies>
 <technology name=""/>
 </technologies>
@@ -3981,8 +4042,8 @@ Block, Siemens and generic&lt;p&gt;
 <part name="R2" library="microbuilder" deviceset="RESISTOR" device="_0603" value="22"/>
 <part name="R3" library="microbuilder" deviceset="RESISTOR" device="_0603" value="22"/>
 <part name="VBUS" library="my" deviceset="VBUS" device=""/>
-<part name="U$2" library="my" deviceset="VBAT" device=""/>
-<part name="U$3" library="my" deviceset="VBAT" device=""/>
+<part name="U$2" library="my" deviceset="3V" device=""/>
+<part name="U$3" library="my" deviceset="3V" device=""/>
 <part name="U1" library="microbuilder" deviceset="MCP73833" device="" value="MCP73833"/>
 <part name="LED1" library="adafruit" deviceset="LED" device="3MM" value="ORANGE"/>
 <part name="LED2" library="adafruit" deviceset="LED" device="3MM" value="GREEN"/>
@@ -4004,7 +4065,7 @@ Block, Siemens and generic&lt;p&gt;
 <part name="C2" library="microbuilder" deviceset="CAP_CERAMIC" device="0603"/>
 <part name="GND6" library="supply1" deviceset="GND" device=""/>
 <part name="U$4" library="my" deviceset="TPS61085" device=""/>
-<part name="U$5" library="my" deviceset="VBAT" device=""/>
+<part name="U$5" library="my" deviceset="3V" device=""/>
 <part name="C3" library="microbuilder" deviceset="CAP_CERAMIC" device="0603" value="1uF"/>
 <part name="C4" library="microbuilder" deviceset="CAP_CERAMIC" device="0805" value="10uF 16V"/>
 <part name="GND7" library="supply1" deviceset="GND" device=""/>
@@ -4025,14 +4086,21 @@ Block, Siemens and generic&lt;p&gt;
 <part name="VBUS3" library="my" deviceset="VBUS" device=""/>
 <part name="C9" library="microbuilder" deviceset="CAP_CERAMIC" device="0603" value="1uF"/>
 <part name="GND8" library="supply1" deviceset="GND" device=""/>
-<part name="U$8" library="my" deviceset="VBAT" device=""/>
+<part name="U$8" library="my" deviceset="3V" device=""/>
+<part name="U$1" library="my" deviceset="MCP1700" device=""/>
+<part name="U$6" library="my" deviceset="VBAT" device=""/>
+<part name="U$9" library="my" deviceset="3V" device=""/>
+<part name="GND10" library="supply1" deviceset="GND" device=""/>
+<part name="C10" library="microbuilder" deviceset="CAP_CERAMIC" device="0603" value="1uF"/>
+<part name="C11" library="microbuilder" deviceset="CAP_CERAMIC" device="0603" value="1uF"/>
 </parts>
 <sheets>
 <sheet>
 <plain>
-<text x="91.44" y="248.92" size="1.778" layer="94">MicroUSB connection</text>
-<text x="104.14" y="149.86" size="1.778" layer="94">Battery charger</text>
-<text x="218.44" y="147.32" size="1.778" layer="94">DC-DC Converter 12V</text>
+<text x="91.44" y="248.92" size="1.778" layer="97">MicroUSB connection</text>
+<text x="104.14" y="149.86" size="1.778" layer="97">Battery charger</text>
+<text x="218.44" y="147.32" size="1.778" layer="97">DC-DC Converter 12V</text>
+<text x="96.52" y="201.93" size="1.778" layer="97">3V regulator</text>
 </plain>
 <instances>
 <instance part="USB" gate="G$1" x="95.25" y="227.33"/>
@@ -4040,8 +4108,8 @@ Block, Siemens and generic&lt;p&gt;
 <instance part="R2" gate="G$1" x="110.49" y="224.79"/>
 <instance part="R3" gate="G$1" x="110.49" y="232.41"/>
 <instance part="VBUS" gate="VBUS" x="102.87" y="236.22"/>
-<instance part="U$2" gate="VBAT" x="129.54" y="130.81"/>
-<instance part="U$3" gate="VBAT" x="160.02" y="226.06"/>
+<instance part="U$2" gate="3V" x="129.54" y="130.81"/>
+<instance part="U$3" gate="3V" x="160.02" y="226.06"/>
 <instance part="U1" gate="G$1" x="111.76" y="119.38"/>
 <instance part="LED1" gate="G$1" x="86.36" y="142.24"/>
 <instance part="LED2" gate="G$1" x="77.47" y="142.24"/>
@@ -4065,7 +4133,7 @@ Block, Siemens and generic&lt;p&gt;
 <instance part="C2" gate="G$1" x="162.56" y="185.42" rot="R90"/>
 <instance part="GND6" gate="1" x="153.67" y="189.23" rot="R270"/>
 <instance part="U$4" gate="A" x="214.63" y="123.19"/>
-<instance part="U$5" gate="VBAT" x="185.42" y="132.08"/>
+<instance part="U$5" gate="3V" x="185.42" y="132.08"/>
 <instance part="C3" gate="G$1" x="191.77" y="119.38"/>
 <instance part="C4" gate="G$1" x="187.96" y="121.92" rot="R180"/>
 <instance part="GND7" gate="1" x="200.66" y="111.76"/>
@@ -4086,7 +4154,13 @@ Block, Siemens and generic&lt;p&gt;
 <instance part="VBUS3" gate="VBUS" x="163.83" y="242.57"/>
 <instance part="C9" gate="G$1" x="157.48" y="203.2" rot="R90"/>
 <instance part="GND8" gate="1" x="147.32" y="203.2" rot="R270"/>
-<instance part="U$8" gate="VBAT" x="229.87" y="220.98"/>
+<instance part="U$8" gate="3V" x="229.87" y="220.98"/>
+<instance part="U$1" gate="A" x="106.68" y="187.96"/>
+<instance part="U$6" gate="VBAT" x="86.36" y="196.85"/>
+<instance part="U$9" gate="3V" x="124.46" y="195.58"/>
+<instance part="GND10" gate="1" x="106.68" y="175.26"/>
+<instance part="C10" gate="G$1" x="90.17" y="185.42"/>
+<instance part="C11" gate="G$1" x="120.65" y="185.42"/>
 </instances>
 <busses>
 </busses>
@@ -4191,6 +4265,19 @@ Block, Siemens and generic&lt;p&gt;
 <wire x1="152.4" y1="203.2" x2="149.86" y2="203.2" width="0.1524" layer="91"/>
 <pinref part="GND8" gate="1" pin="GND"/>
 </segment>
+<segment>
+<pinref part="U$1" gate="A" pin="GND"/>
+<wire x1="106.68" y1="180.34" x2="106.68" y2="179.07" width="0.1524" layer="91"/>
+<pinref part="GND10" gate="1" pin="GND"/>
+<pinref part="C10" gate="G$1" pin="P$2"/>
+<wire x1="106.68" y1="179.07" x2="106.68" y2="177.8" width="0.1524" layer="91"/>
+<wire x1="90.17" y1="182.88" x2="90.17" y2="179.07" width="0.1524" layer="91"/>
+<wire x1="90.17" y1="179.07" x2="106.68" y2="179.07" width="0.1524" layer="91"/>
+<wire x1="106.68" y1="179.07" x2="120.65" y2="179.07" width="0.1524" layer="91"/>
+<pinref part="C11" gate="G$1" pin="P$2"/>
+<wire x1="120.65" y1="179.07" x2="120.65" y2="182.88" width="0.1524" layer="91"/>
+<junction x="106.68" y="179.07"/>
+</segment>
 </net>
 <net name="N$1" class="0">
 <segment>
@@ -4245,7 +4332,7 @@ Block, Siemens and generic&lt;p&gt;
 </net>
 <net name="VBAT" class="0">
 <segment>
-<pinref part="U$2" gate="VBAT" pin="VBAT"/>
+<pinref part="U$2" gate="3V" pin="3V"/>
 <wire x1="129.54" y1="127" x2="129.54" y2="130.81" width="0.1524" layer="91"/>
 <pinref part="U1" gate="G$1" pin="VBAT1"/>
 <wire x1="127" y1="127" x2="129.54" y2="127" width="0.1524" layer="91"/>
@@ -4255,7 +4342,7 @@ Block, Siemens and generic&lt;p&gt;
 <junction x="129.54" y="127"/>
 </segment>
 <segment>
-<pinref part="U$3" gate="VBAT" pin="VBAT"/>
+<pinref part="U$3" gate="3V" pin="3V"/>
 <wire x1="160.02" y1="226.06" x2="160.02" y2="223.52" width="0.1524" layer="91"/>
 <pinref part="U6" gate="G$1" pin="AVCC1"/>
 <wire x1="170.18" y1="215.9" x2="167.64" y2="215.9" width="0.1524" layer="91"/>
@@ -4275,7 +4362,7 @@ Block, Siemens and generic&lt;p&gt;
 <wire x1="163.83" y1="223.52" x2="160.02" y2="223.52" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="U$5" gate="VBAT" pin="VBAT"/>
+<pinref part="U$5" gate="3V" pin="3V"/>
 <wire x1="185.42" y1="127" x2="185.42" y2="132.08" width="0.1524" layer="91"/>
 <pinref part="C4" gate="G$1" pin="P$2"/>
 <wire x1="187.96" y1="124.46" x2="187.96" y2="127" width="0.1524" layer="91"/>
@@ -4301,7 +4388,17 @@ Block, Siemens and generic&lt;p&gt;
 <segment>
 <pinref part="U6" gate="G$1" pin="PE2(!HWB)"/>
 <wire x1="218.44" y1="220.98" x2="229.87" y2="220.98" width="0.1524" layer="91"/>
-<pinref part="U$8" gate="VBAT" pin="VBAT"/>
+<pinref part="U$8" gate="3V" pin="3V"/>
+</segment>
+<segment>
+<pinref part="U$1" gate="A" pin="VIN"/>
+<wire x1="96.52" y1="193.04" x2="90.17" y2="193.04" width="0.1524" layer="91"/>
+<wire x1="90.17" y1="193.04" x2="86.36" y2="193.04" width="0.1524" layer="91"/>
+<wire x1="86.36" y1="193.04" x2="86.36" y2="196.85" width="0.1524" layer="91"/>
+<pinref part="U$6" gate="VBAT" pin="VBAT"/>
+<pinref part="C10" gate="G$1" pin="P$1"/>
+<wire x1="90.17" y1="190.5" x2="90.17" y2="193.04" width="0.1524" layer="91"/>
+<junction x="90.17" y="193.04"/>
 </segment>
 </net>
 <net name="N$6" class="0">
@@ -4664,6 +4761,18 @@ Block, Siemens and generic&lt;p&gt;
 <pinref part="U6" gate="G$1" pin="PE6(INT.6/AIN0)"/>
 <wire x1="218.44" y1="218.44" x2="226.06" y2="218.44" width="0.1524" layer="91"/>
 <label x="220.98" y="218.44" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="3V" class="0">
+<segment>
+<pinref part="U$1" gate="A" pin="VOUT"/>
+<wire x1="116.84" y1="193.04" x2="120.65" y2="193.04" width="0.1524" layer="91"/>
+<wire x1="120.65" y1="193.04" x2="124.46" y2="193.04" width="0.1524" layer="91"/>
+<wire x1="124.46" y1="193.04" x2="124.46" y2="195.58" width="0.1524" layer="91"/>
+<pinref part="U$9" gate="3V" pin="3V"/>
+<pinref part="C11" gate="G$1" pin="P$1"/>
+<wire x1="120.65" y1="190.5" x2="120.65" y2="193.04" width="0.1524" layer="91"/>
+<junction x="120.65" y="193.04"/>
 </segment>
 </net>
 </nets>
